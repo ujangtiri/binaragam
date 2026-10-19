@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Produk - Bina Ragam</title>
+    <meta name="description" content="Detail lengkap produk dari Bina Ragam">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/lucide@latest/fontawesome/lucide.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="../assets/css/custom.css">
+</head>
+<body class="font-poppins bg-gradient-to-br from-primary-50 to-secondary-50 min-h-screen">
+    
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container-custom">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center">
+                        <i data-lucide="shopping-bag" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-gray-800">Bina Ragam</h1>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="../index.html" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium">Beranda</a>
+                    <a href="products.html" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium">Produk</a>
+                    <a href="../index.html#about" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium">Tentang</a>
+                    <a href="../index.html#contact" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium">Kontak</a>
+                    <div class="flex items-center space-x-3 ml-6">
+                        <a href="cart.html" class="relative p-2 text-gray-700 hover:text-primary-600 transition-colors duration-200">
+                            <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                            <span id="cart-count" class="absolute -top-1 -right-1 bg-yellow-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        </a>
+                        <a href="login.html" class="text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium">Masuk</a>
+                        <a href="register.html" class="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors duration-200 font-medium">Daftar</a>
+                    </div>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors duration-200">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden border-t border-gray-200">
+                <div class="px-4 py-3 space-y-3">
+                    <a href="../index.html" class="block text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2">Beranda</a>
+                    <a href="products.html" class="block text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2">Produk</a>
+                    <a href="../index.html#about" class="block text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2">Tentang</a>
+                    <a href="../index.html#contact" class="block text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2">Kontak</a>
+                    <div class="border-t border-gray-200 pt-3 space-y-3">
+                        <a href="cart.html" class="flex items-center text-gray-700 hover:text-primary-600 transition-colors duration-200 py-2">
+                            <i data-lucide="shopping-cart" class="w-5 h-5 mr-2"></i>
+                            Keranjang
+                            <span id="cart-count-mobile" class="bg-yellow-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center ml-auto">0</span>
+                        </a>
+                        <a href="login.html" class="block text-gray-700 hover:text-primary-600 transition-colors duration-200 font-medium py-2">Masuk</a>
+                        <a href="register.html" class="block bg-primary-600 text-white text-center px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors duration-200 font-medium">Daftar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Loading State -->
+        <div id="loadingState" class="py-16">
+            <div class="container-custom text-center">
+                <lottie-player
+                    src="https://assets2.lottiefiles.com/packages/lf20_jcikwtux.json"
+                    background="transparent"
+                    speed="1"
+                    style="width: 100px; height: 100px; margin: 0 auto;"
+                    loop
+                    autoplay>
+                </lottie-player>
+                <p class="text-gray-600 mt-4">Memuat produk...</p>
+            </div>
+        </div>
+
+        <!-- Product Detail -->
+        <div id="productDetail" class="hidden py-16">
+            <div class="container-custom">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Product Images -->
+                    <div data-aos="fade-right">
+                        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden mb-6">
+                            <img id="mainProductImage" src="" alt="" class="w-full h-96 object-cover">
+                        </div>
+                        <div id="productThumbnails" class="grid grid-cols-4 gap-4">
+                            <!-- Thumbnails will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Product Info -->
+                    <div data-aos="fade-left">
+                        <div class="mb-6">
+                            <span id="productCategory" class="inline-block bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm font-medium mb-2"></span>
+                            <h1 id="productName" class="text-3xl font-bold text-gray-800 mb-4"></h1>
+                            <div class="flex items-center mb-4">
+                                <div class="flex text-yellow-400" id="productRating">
+                                    <!-- Rating stars will be loaded here -->
+                                </div>
+                                <span id="productReviews" class="text-sm text-gray-500 ml-2"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="flex items-center space-x-4 mb-2">
+                                <span id="productPrice" class="text-3xl font-bold text-primary-600"></span>
+                                <span id="productOriginalPrice" class="text-xl text-gray-500 line-through"></span>
+                                <span id="productDiscount" class="bg-red-500 text-white px-2 py-1 rounded-lg text-sm font-semibold"></span>
+                            </div>
+                            <p id="productStock" class="text-sm text-gray-600"></p>
+                        </div>
+
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-3">Deskripsi</h3>
+                            <p id="productDescription" class="text-gray-600 leading-relaxed"></p>
+                        </div>
+
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-3">Spesifikasi</h3>
+                            <div id="productSpecifications" class="bg-gray-50 rounded-xl p-4">
+                                <!-- Specifications will be loaded here -->
+                            </div>
+                        </div>
+
+                        <!-- Purchase Buttons -->
+                        <div class="space-y-4">
+                            <button id="shopeeBtn" onclick="purchaseProduct('shopee')" class="w-full bg-orange-500 text-white py-4 px-6 rounded-2xl hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 font-semibold text-lg flex items-center justify-center space-x-3">
+                                <span>Beli via Shopee</span>
+                                <i data-lucide="external-link" class="w-5 h-5"></i>
+                            </button>
+                            <button id="tokopediaBtn" onclick="purchaseProduct('tokopedia')" class="w-full bg-green-500 text-white py-4 px-6 rounded-2xl hover:bg-green-600 transition-all duration-300 transform hover:scale-105 font-semibold text-lg flex items-center justify-center space-x-3">
+                                <span>Beli via Tokopedia</span>
+                                <i data-lucide="external-link" class="w-5 h-5"></i>
+                            </button>
+                            <button onclick="addToCart()" class="w-full bg-primary-600 text-white py-4 px-6 rounded-2xl hover:bg-primary-700 transition-all duration-300 transform hover:scale-105 font-semibold text-lg flex items-center justify-center space-x-3">
+                                <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                                <span>Tambah ke Keranjang</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container-custom">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center">
+                            <i data-lucide="shopping-bag" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Bina Ragam</h3>
+                    </div>
+                    <p class="text-gray-300">Platform toko online dengan berbagai produk berkualitas tinggi untuk kebutuhan Anda.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Produk</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Elektronik</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Fashion</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Rumah Tangga</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Olahraga</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Tentang</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Tentang Kami</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Kontak</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Kebijakan Privasi</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-200">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Ikuti Kami</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-200">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-200">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-200">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors duration-200">
+                            <i data-lucide="whatsapp" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2024 Bina Ragam. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="../assets/js/firebase-config.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Get product ID from URL
+        function getProductIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // Load product detail
+        async function loadProductDetail() {
+            try {
+                const productId = getProductIdFromUrl();
+                if (!productId) {
+                    showError('Produk tidak ditemukan');
+                    return;
+                }
+
+                const loadingState = document.getElementById('loadingState');
+                const productDetail = document.getElementById('productDetail');
+
+                loadingState.classList.remove('hidden');
+                productDetail.classList.add('hidden');
+
+                // Get product from Firebase
+                const product = await window.firebaseDB.getProduct(productId);
+                
+                if (!product) {
+                    showError('Produk tidak ditemukan');
+                    return;
+                }
+
+                // Display product
+                displayProduct(product);
+                
+                loadingState.classList.add('hidden');
+                productDetail.classList.remove('hidden');
+
+                // GSAP Animation
+                gsap.from("#productDetail > div", {
+                    duration: 1,
+                    y: 50,
+                    opacity: 0,
+                    stagger: 0.2,
+                    ease: "power2.out"
+                });
+
+            } catch (error) {
+                console.error('Error loading product:', error);
+                showError('Gagal memuat produk');
+            }
+        }
+
+        // Display product
+        function displayProduct(product) {
+            // Main image
+            document.getElementById('mainProductImage').src = product.imageUrl || 'https://via.placeholder.com/600x400?text=Produk';
+            document.getElementById('mainProductImage').alt = product.name;
+
+            // Product info
+            document.getElementById('productCategory').textContent = product.category || 'Produk';
+            document.getElementById('productName').textContent = product.name;
+            document.getElementById('productDescription').textContent = product.description;
+
+            // Price
+            const finalPrice = product.discount ? Math.round(product.price * (1 - product.discount / 100)) : product.price;
+            document.getElementById('productPrice').textContent = `Rp${finalPrice.toLocaleString('id-ID')}`;
+            
+            if (product.discount) {
+                document.getElementById('productOriginalPrice').textContent = `Rp${product.price.toLocaleString('id-ID')}`;
+                document.getElementById('productDiscount').textContent = `-${product.discount}%`;
+            } else {
+                document.getElementById('productOriginalPrice').style.display = 'none';
+                document.getElementById('productDiscount').style.display = 'none';
+            }
+
+            // Stock
+            document.getElementById('productStock').textContent = `Stok: ${product.stock || 0} tersedia`;
+
+            // Rating
+            const rating = product.rating || 4.5;
+            const reviews = product.reviews || 128;
+            displayRating(rating, reviews);
+
+            // Specifications
+            displaySpecifications(product);
+
+            // Store product data for purchase
+            window.currentProduct = product;
+
+            // Thumbnails
+            displayThumbnails(product.images || [product.imageUrl]);
+        }
+
+        // Display rating
+        function displayRating(rating, reviews) {
+            const ratingContainer = document.getElementById('productRating');
+            const reviewsText = document.getElementById('productReviews');
+
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+            let starsHTML = '';
+
+            for (let i = 0; i < fullStars; i++) {
+                starsHTML += '<i data-lucide="star" class="w-5 h-5 fill-current"></i>';
+            }
+
+            if (hasHalfStar) {
+                starsHTML += '<i data-lucide="star-half" class="w-5 h-5 fill-current"></i>';
+            }
+
+            const emptyStars = 5 - Math.ceil(rating);
+            for (let i = 0; i < emptyStars; i++) {
+                starsHTML += '<i data-lucide="star" class="w-5 h-5"></i>';
+            }
+
+            ratingContainer.innerHTML = starsHTML;
+            reviewsText.textContent = `(${reviews} ulasan)`;
+            
+            lucide.createIcons();
+        }
+
+        // Display specifications
+        function displaySpecifications(product) {
+            const specsContainer = document.getElementById('productSpecifications');
+            
+            const specs = [
+                { label: 'Kategori', value: product.category || 'Produk' },
+                { label: 'Kondisi', value: 'Baru' },
+                { label: 'Berat', value: product.weight || '500g' },
+                { label: 'Asal', value: product.origin || 'Indonesia' }
+            ];
+
+            if (product.specifications) {
+                Object.entries(product.specifications).forEach(([key, value]) => {
+                    specs.push({ label: key, value: value });
+                });
+            }
+
+            specsContainer.innerHTML = specs.map(spec => `
+                <div class="flex justify-between items-center py-2 border-b border-gray-200 last:border-b-0">
+                    <span class="text-gray-600">${spec.label}</span>
+                    <span class="font-medium text-gray-800">${spec.value}</span>
+                </div>
+            `).join('');
+        }
+
+        // Display thumbnails
+        function displayThumbnails(images) {
+            const thumbnailsContainer = document.getElementById('productThumbnails');
+            
+            thumbnailsContainer.innerHTML = images.slice(0, 4).map((image, index) => `
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl overflow-hidden cursor-pointer hover:ring-2 hover:ring-primary-500 transition-all duration-200" 
+                     onclick="changeMainImage('${image}')">
+                    <img src="${image}" alt="Thumbnail ${index + 1}" class="w-full h-20 object-cover">
+                </div>
+            `).join('');
+        }
+
+        // Change main image
+        function changeMainImage(imageSrc) {
+            document.getElementById('mainProductImage').src = imageSrc;
+            
+            // Add animation
+            gsap.from("#mainProductImage", {
+                duration: 0.5,
+                scale: 0.9,
+                opacity: 0.7,
+                ease: "power2.out"
+            });
+        }
+
+        // Purchase product
+        async function purchaseProduct(platform) {
+            if (!window.currentProduct) return;
+
+            const product = window.currentProduct;
+            const link = platform === 'shopee' ? product.shopeeLink : product.tokopediaLink;
+            
+            if (!link) {
+                Swal.fire({
+                    title: 'Maaf',
+                    text: `Link ${platform} belum tersedia untuk produk ini`,
+                    icon: 'warning',
+                    confirmButtonColor: '#F59E0B'
+                });
+                return;
+            }
+
+            try {
+                // Track click
+                await window.firebaseDB.incrementProductClicks(product.id, platform);
+                
+                // Track via PHP API
+                await fetch('../api/track-click.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        product_id: product.id,
+                        product_name: product.name,
+                        platform: platform,
+                        clicked_at: new Date().toISOString()
+                    })
+                });
+
+                // Show loading animation
+                Swal.fire({
+                    title: 'Mengarahkan...',
+                    text: `Anda akan diarahkan ke ${platform}`,
+                    icon: 'info',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+
+                // Redirect after short delay
+                setTimeout(() => {
+                    window.open(link, '_blank');
+                }, 1500);
+
+            } catch (error) {
+                console.error('Error tracking click:', error);
+                // Still redirect even if tracking fails
+                window.open(link, '_blank');
+            }
+        }
+
+        // Add to cart
+        function addToCart() {
+            if (!window.currentProduct) return;
+
+            const product = window.currentProduct;
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            const existingItem = cart.find(item => item.id === product.id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ 
+                    id: product.id, 
+                    quantity: 1,
+                    name: product.name,
+                    price: product.discount ? Math.round(product.price * (1 - product.discount / 100)) : product.price,
+                    image: product.imageUrl
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            
+            Swal.fire({
+                title: 'Berhasil!',
+                text: 'Produk berhasil ditambahkan ke keranjang',
+                icon: 'success',
+                confirmButtonColor: '#4F46E5',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        }
+
+        // Update cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            document.getElementById('cart-count').textContent = totalItems;
+            document.getElementById('cart-count-mobile').textContent = totalItems;
+        }
+
+        // Show error
+        function showError(message) {
+            Swal.fire({
+                title: 'Error',
+                text: message,
+                icon: 'error',
+                confirmButtonColor: '#DC2626'
+            }).then(() => {
+                window.location.href = 'products.html';
+            });
+        }
+
+        // Load product when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProductDetail();
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

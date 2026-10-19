@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - Bina Ragam</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Lottie -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md shadow-sm z-50" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        Bina Ragam
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="nav-link">Beranda</a>
+                        <a href="user/products.html" class="nav-link">Produk</a>
+                        <a href="tentang.html" class="nav-link active">Tentang</a>
+                        <a href="kontak.html" class="nav-link">Kontak</a>
+                        <a href="user/login.html" class="btn-primary">Masuk</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="nav-link p-2">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden bg-white/95 backdrop-blur-md hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="mobile-nav-link">Beranda</a>
+                <a href="user/products.html" class="mobile-nav-link">Produk</a>
+                <a href="tentang.html" class="mobile-nav-link active">Tentang</a>
+                <a href="kontak.html" class="mobile-nav-link">Kontak</a>
+                <a href="user/login.html" class="mobile-nav-link">Masuk</a>
+                <a href="user/register.html" class="mobile-nav-link">Daftar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-primary/10 to-secondary/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center" data-aos="fade-up">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Tentang Bina Ragam
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Mengenal lebih dekat dengan platform toko online yang menghubungkan Anda dengan produk berkualitas dari berbagai penjual terpercaya.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Company Story -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Kisah Kami</h2>
+                    <div class="space-y-4 text-gray-600">
+                        <p>
+                            Bina Ragam berdiri pada tahun 2020 dengan visi untuk menjadi jembatan antara penjual lokal berkualitas dengan konsumen yang mencari produk terbaik. Kami percaya bahwa setiap produk memiliki cerita dan nilai yang patut dihargai.
+                        </p>
+                        <p>
+                            Berawal dari sebuah ide sederhana untuk membantu UMKM go digital, Bina Ragam kini telah berkembang menjadi platform yang menghubungkan ribuan penjual dengan jutaan konsumen di seluruh Indonesia.
+                        </p>
+                        <p>
+                            Kami tidak hanya menyediakan platform transaksi, tetapi juga membina ekosistem yang berkelanjutan dimana penjual dapat berkembang dan konsumen mendapatkan pengalaman berbelanja terbaik.
+                        </p>
+                    </div>
+                </div>
+                <div data-aos="fade-left">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Bina Ragam Team" 
+                             class="rounded-2xl shadow-2xl">
+                        <div class="absolute -bottom-6 -right-6 bg-primary text-white p-6 rounded-2xl shadow-lg">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold">4+</div>
+                                <div class="text-sm">Tahun Pengalaman</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vision & Mission -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+                <div class="bg-white rounded-2xl shadow-lg p-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-primary/10 p-3 rounded-xl mr-4">
+                            <i data-lucide="eye" class="w-8 h-8 text-primary"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Visi Kami</h3>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed">
+                        Menjadi platform e-commerce terdepan yang memberdayakan UMKM Indonesia dan menyediakan pengalaman berbelanja terbaik bagi konsumen dengan teknologi inovatif dan pelayanan yang berkualitas.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-secondary/10 p-3 rounded-xl mr-4">
+                            <i data-lucide="target" class="w-8 h-8 text-secondary"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Misi Kami</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0"></i>
+                            <span>Memberdayakan penjual lokal melalui teknologi digital</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0"></i>
+                            <span>Menyediakan produk berkualitas dengan harga kompetitif</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0"></i>
+                            <span>Memberikan pengalaman berbelanja yang aman dan nyaman</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0"></i>
+                            <span>Mendukung pertumbuhan ekonomi digital Indonesia</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Values -->
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Nilai-Nilai Kami</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Prinsip-prinsip yang menjadi dasar setiap keputusan dan tindakan kami
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-primary/10 p-6 rounded-2xl mb-4 mx-auto w-20 h-20 flex items-center justify-center">
+                        <i data-lucide="shield" class="w-8 h-8 text-primary"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Kepercayaan</h4>
+                    <p class="text-gray-600">Kepercayaan adalah fondasi utama dalam setiap transaksi yang kami lakukan</p>
+                </div>
+
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-secondary/10 p-6 rounded-2xl mb-4 mx-auto w-20 h-20 flex items-center justify-center">
+                        <i data-lucide="users" class="w-8 h-8 text-secondary"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Kolaborasi</h4>
+                    <p class="text-gray-600">Kami percaya pada kekuatan kerja sama tim dan kemitraan yang saling menguntungkan</p>
+                </div>
+
+                <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-accent/10 p-6 rounded-2xl mb-4 mx-auto w-20 h-20 flex items-center justify-center">
+                        <i data-lucide="zap" class="w-8 h-8 text-accent"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Inovasi</h4>
+                    <p class="text-gray-600">Kami terus berinovasi untuk memberikan solusi terbaik bagi pelanggan kami</p>
+                </div>
+
+                <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+                    <div class="bg-success/10 p-6 rounded-2xl mb-4 mx-auto w-20 h-20 flex items-center justify-center">
+                        <i data-lucide="heart" class="w-8 h-8 text-success"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Kepedulian</h4>
+                    <p class="text-gray-600">Kami peduli terhadap pelanggan, mitra, dan komunitas tempat kami beroperasi</p>
+                </div>
+            </div>
+
+            <!-- Team Section -->
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Tim Kami</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Profesional berpengalaman yang berkomitmen untuk memberikan yang terbaik
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-2xl shadow-lg p-6 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                         alt="Team Member" 
+                         class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                    <h4 class="text-xl font-bold text-gray-900 mb-1">Andi Pratama</h4>
+                    <p class="text-primary font-medium mb-2">Founder & CEO</p>
+                    <p class="text-gray-600 text-sm">Pengusaha muda dengan visi besar untuk transformasi digital UMKM</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 text-center" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b5bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                         alt="Team Member" 
+                         class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                    <h4 class="text-xl font-bold text-gray-900 mb-1">Siti Nurhaliza</h4>
+                    <p class="text-secondary font-medium mb-2">COO</p>
+                    <p class="text-gray-600 text-sm">Ahli operasional dengan pengalaman 10+ tahun di e-commerce</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 text-center" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                         alt="Team Member" 
+                         class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                    <h4 class="text-xl font-bold text-gray-900 mb-1">Budi Santoso</h4>
+                    <p class="text-accent font-medium mb-2">CTO</p>
+                    <p class="text-gray-600 text-sm">Teknolog handal yang mengawasi inovasi dan keamanan platform</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 text-center" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                         alt="Team Member" 
+                         class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+                    <h4 class="text-xl font-bold text-gray-900 mb-1">Maya Sari</h4>
+                    <p class="text-success font-medium mb-2">Head of Marketing</p>
+                    <p class="text-gray-600 text-sm">Strategis marketing yang membangun brand dan komunitas Bina Ragam</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-r from-primary to-secondary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-white mb-4">
+                    Bergabunglah dengan Komunitas Bina Ragam
+                </h2>
+                <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+                    Jadilah bagian dari perjalanan kami dalam membangun ekosistem e-commerce yang inklusif dan berkelanjutan
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="user/register.html" class="btn-white">
+                        <i data-lucide="user-plus" class="w-4 h-4 mr-2"></i>
+                        Daftar Sebagai Pembeli
+                    </a>
+                    <a href="kontak.html" class="btn-outline-white">
+                        <i data-lucide="store" class="w-4 h-4 mr-2"></i>
+                        Jadi Mitra Penjual
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Bina Ragam</h3>
+                    <p class="text-gray-400 mb-4">Platform toko online terpercaya dengan berbagai produk berkualitas.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Produk</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="user/products.html?category=fashion" class="hover:text-white transition-colors">Fashion</a></li>
+                        <li><a href="user/products.html?category=elektronik" class="hover:text-white transition-colors">Elektronik</a></li>
+                        <li><a href="user/products.html?category=rumah-tangga" class="hover:text-white transition-colors">Rumah Tangga</a></li>
+                        <li><a href="user/products.html" class="hover:text-white transition-colors">Semua Produk</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Informasi</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="tentang.html" class="hover:text-white transition-colors">Tentang Kami</a></li>
+                        <li><a href="kontak.html" class="hover:text-white transition-colors">Kontak</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Kontak</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <div class="flex items-center">
+                            <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                            <span>+62 812-3456-7890</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="mail" class="w-4 h-4 mr-2"></i>
+                            <span>info@binaragam.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Jakarta, Indonesia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-gray-700 my-8">
+            <div class="text-center text-gray-400">
+                <p>&copy; 2024 Bina Ragam. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Initialize GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
+        });
+
+        // GSAP Animations
+        gsap.from(".bg-white.rounded-2xl", {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            stagger: 0.2,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: ".bg-white.rounded-2xl",
+                start: "top 80%"
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

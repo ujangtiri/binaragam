@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang Belanja - Bina Ragam Shop</title>
+    <meta name="description" content="Lihat dan kelola produk di keranjang belanja Anda">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-color: #1C1C1C;
+            --secondary-color: #F5B700;
+            --background-color: #F9F9F9;
+            --accent-color: #2E8B57;
+            --text-color: #333333;
+        }
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+        
+        .cart-item {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .cart-item:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #E5A700;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--primary-color);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2C2C2C;
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background-color: #ef4444;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-danger:hover {
+            background-color: #dc2626;
+            transform: translateY(-2px);
+        }
+        
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(249, 249, 249, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .quantity-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .quantity-btn:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .quantity-input {
+            transition: all 0.3s ease;
+        }
+        
+        .quantity-input:focus {
+            box-shadow: 0 0 0 3px rgba(245, 183, 0, 0.2);
+            border-color: var(--secondary-color);
+        }
+        
+        .empty-cart {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .checkout-card {
+            position: sticky;
+            top: 120px;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--secondary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="sticky-nav shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
+                        <i data-lucide="shopping-bag" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-gray-900">Bina Ragam</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link font-medium">Home</a>
+                    <a href="products.html" class="nav-link font-medium">Produk</a>
+                    <a href="about.html" class="nav-link font-medium">Tentang Kami</a>
+                    <a href="contact.html" class="nav-link font-medium">Kontak</a>
+                    <div class="flex items-center space-x-4">
+                        <a href="cart.html" class="relative p-2 rounded-full hover:bg-gray-100">
+                            <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                            <span id="cart-count" class="absolute -top-1 -right-1 bg-yellow-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        </a>
+                        <a href="login.html" class="btn-secondary px-4 py-2 rounded-lg font-medium">Login</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-200">
+                <div class="flex flex-col space-y-4 pt-4">
+                    <a href="index.html" class="nav-link font-medium">Home</a>
+                    <a href="products.html" class="nav-link font-medium">Produk</a>
+                    <a href="about.html" class="nav-link font-medium">Tentang Kami</a>
+                    <a href="contact.html" class="nav-link font-medium">Kontak</a>
+                    <div class="flex flex-col space-y-2 pt-2">
+                        <a href="cart.html" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100">
+                            <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                            <span>Keranjang</span>
+                            <span id="cart-count-mobile" class="bg-yellow-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        </a>
+                        <a href="login.html" class="btn-secondary px-4 py-2 rounded-lg font-medium text-center">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="pt-24 pb-12 bg-gradient-to-r from-gray-900 to-gray-700 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4" data-aos="fade-up">Keranjang Belanja</h1>
+            <p class="text-lg opacity-90 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                Kelola produk yang Anda pilih sebelum melakukan checkout
+            </p>
+        </div>
+    </section>
+
+    <!-- Cart Content -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Cart Items -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Produk dalam Keranjang</h2>
+                        
+                        <!-- Empty Cart State -->
+                        <div id="empty-cart" class="text-center py-12 empty-cart">
+                            <i data-lucide="shopping-cart" class="w-16 h-16 text-gray-300 mx-auto mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-600 mb-2">Keranjang Anda Kosong</h3>
+                            <p class="text-gray-500 mb-6">Ayo tambahkan produk favorit Anda ke keranjang!</p>
+                            <a href="products.html" class="btn-primary px-6 py-3 rounded-lg font-medium hover:scale-105 transition-transform">
+                                <i data-lucide="shopping-bag" class="w-5 h-5 inline mr-2"></i>
+                                Mulai Belanja
+                            </a>
+                        </div>
+                        
+                        <!-- Cart Items List -->
+                        <div id="cart-items" class="space-y-4">
+                            <!-- Cart items will be rendered here -->
+                        </div>
+                        
+                        <!-- Cart Actions -->
+                        <div id="cart-actions" class="hidden mt-6 pt-6 border-t border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <button onclick="clearCart()" class="btn-danger px-4 py-2 rounded-lg font-medium hover:scale-105 transition-transform">
+                                    <i data-lucide="trash-2" class="w-4 h-4 inline mr-2"></i>
+                                    Kosongkan Keranjang
+                                </button>
+                                <a href="products.html" class="btn-secondary px-4 py-2 rounded-lg font-medium hover:scale-105 transition-transform">
+                                    <i data-lucide="arrow-left" class="w-4 h-4 inline mr-2"></i>
+                                    Lanjutkan Belanja
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Order Summary -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow-sm p-6 checkout-card">
+                        <h3 class="text-xl font-bold text-gray-900 mb-6">Ringkasan Pesanan</h3>
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Subtotal</span>
+                                <span id="subtotal" class="font-semibold">Rp 0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Ongkos Kirim</span>
+                                <span class="font-semibold">Rp 15.000</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Diskon</span>
+                                <span class="font-semibold text-green-600">-Rp 0</span>
+                            </div>
+                            <div class="border-t border-gray-200 pt-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-lg font-semibold text-gray-900">Total</span>
+                                    <span id="total" class="text-2xl font-bold text-gray-900">Rp 0</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Promo Code -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Kode Promo (Opsional)</label>
+                            <div class="flex space-x-2">
+                                <input type="text" id="promo-code" placeholder="Masukkan kode promo" 
+                                       class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                                <button onclick="applyPromo()" class="btn-primary px-4 py-2 rounded-lg font-medium hover:scale-105 transition-transform">
+                                    Terapkan
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Checkout Button -->
+                        <button onclick="proceedToCheckout()" id="checkout-btn" class="btn-primary w-full py-3 rounded-lg font-semibold hover:scale-105 transition-transform mb-4">
+                            <i data-lucide="credit-card" class="w-5 h-5 inline mr-2"></i>
+                            Proses Checkout
+                        </button>
+                        
+                        <!-- Continue Shopping -->
+                        <a href="products.html" class="block text-center text-gray-600 hover:text-gray-900 transition-colors">
+                            Lanjutkan Belanja
+                        </a>
+                        
+                        <!-- Security Notice -->
+                        <div class="mt-6 pt-6 border-t border-gray-200">
+                            <div class="flex items-center justify-center space-x-2 text-sm text-gray-500">
+                                <i data-lucide="shield" class="w-4 h-4"></i>
+                                <span>Pembayaran Aman & Terpercaya</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
+                            <i data-lucide="shopping-bag" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <span class="text-2xl font-bold">Bina Ragam</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Toko online terpercaya untuk produk lokal dan modern berkualitas tinggi.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="p-2 bg-gray-800 rounded-lg hover:bg-yellow-500 transition-colors">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="p-2 bg-gray-800 rounded-lg hover:bg-yellow-500 transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="p-2 bg-gray-800 rounded-lg hover:bg-yellow-500 transition-colors">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Produk</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="products.html" class="hover:text-yellow-400 transition-colors">Produk Lokal</a></li>
+                        <li><a href="products.html" class="hover:text-yellow-400 transition-colors">Produk Modern</a></li>
+                        <li><a href="products.html" class="hover:text-yellow-400 transition-colors">Produk Terbaru</a></li>
+                        <li><a href="products.html" class="hover:text-yellow-400 transition-colors">Promo</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Informasi</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="about.html" class="hover:text-yellow-400 transition-colors">Tentang Kami</a></li>
+                        <li><a href="contact.html" class="hover:text-yellow-400 transition-colors">Kontak</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition-colors">FAQ</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Layanan</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Kebijakan Privasi</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Syarat & Ketentuan</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Pengembalian</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition-colors">Garansi</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Bina Ragam Shop. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Custom Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+        
+        // Initialize Lucide Icons
+        lucide.createIcons();
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Cart management functions
+        let promoApplied = false;
+        let discountAmount = 0;
+        
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cart-items');
+            const emptyCart = document.getElementById('empty-cart');
+            const cartActions = document.getElementById('cart-actions');
+            const subtotal = document.getElementById('subtotal');
+            const total = document.getElementById('total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            if (cart.items.length === 0) {
+                emptyCart.classList.remove('hidden');
+                cartActions.classList.add('hidden');
+                subtotal.textContent = 'Rp 0';
+                total.textContent = 'Rp 0';
+                checkoutBtn.disabled = true;
+                checkoutBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                emptyCart.classList.add('hidden');
+                cartActions.classList.remove('hidden');
+                
+                const subtotalAmount = cart.getTotalPrice();
+                const shippingCost = 15000;
+                const totalAmount = subtotalAmount + shippingCost - discountAmount;
+                
+                subtotal.textContent = `Rp ${subtotalAmount.toLocaleString('id-ID')}`;
+                total.textContent = `Rp ${totalAmount.toLocaleString('id-ID')}`;
+                
+                checkoutBtn.disabled = false;
+                checkoutBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+        
+        function clearCart() {
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Apakah Anda yakin ingin mengosongkan keranjang?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#6b7280',
+                confirmButtonText: 'Ya, Kosongkan',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    cart.clearCart();
+                    updateCartDisplay();
+                    Swal.fire(
+                        'Terhapus!',
+                        'Keranjang Anda telah dikosongkan.',
+                        'success'
+                    );
+                }
+            });
+        }
+        
+        function applyPromo() {
+            const promoCode = document.getElementById('promo-code').value.trim().toUpperCase();
+            
+            if (!promoCode) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Kode Promo Kosong',
+                    text: 'Silakan masukkan kode promo terlebih dahulu.',
+                    confirmButtonColor: '#F5B700'
+                });
+                return;
+            }
+            
+            // Simulate promo validation
+            const validPromos = {
+                'DISKON10': 0.10,
+                'WELCOME20': 0.20,
+                'SPECIAL15': 0.15
+            };
+            
+            if (validPromos[promoCode]) {
+                if (promoApplied) {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Kode Promo Sudah Digunakan',
+                        text: 'Anda sudah menggunakan kode promo.',
+                        confirmButtonColor: '#F5B700'
+                    });
+                    return;
+                }
+                
+                const discountPercentage = validPromos[promoCode];
+                const subtotal = cart.getTotalPrice();
+                discountAmount = Math.floor(subtotal * discountPercentage);
+                
+                promoApplied = true;
+                
+                // Update UI
+                const discountElement = document.querySelector('.text-green-600');
+                discountElement.textContent = `-Rp ${discountAmount.toLocaleString('id-ID')}`;
+                
+                // Update total
+                const shippingCost = 15000;
+                const totalAmount = subtotal + shippingCost - discountAmount;
+                document.getElementById('total').textContent = `Rp ${totalAmount.toLocaleString('id-ID')}`;
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Kode Promo Berhasil!',
+                    text: `Anda mendapatkan diskon ${discountPercentage * 100}%`,
+                    confirmButtonColor: '#F5B700'
+                });
+                
+                document.getElementById('promo-code').disabled = true;
+                document.querySelector('[onclick="applyPromo()"]').disabled = true;
+                document.querySelector('[onclick="applyPromo()"]').classList.add('opacity-50', 'cursor-not-allowed');
+                
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Kode Promo Tidak Valid',
+                    text: 'Kode promo yang Anda masukkan tidak valid.',
+                    confirmButtonColor: '#ef4444'
+                });
+            }
+        }
+        
+        function proceedToCheckout() {
+            if (cart.items.length === 0) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Keranjang Kosong',
+                    text: 'Tambahkan produk ke keranjang terlebih dahulu.',
+                    confirmButtonColor: '#F5B700'
+                });
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('loading-overlay').style.display = 'flex';
+            
+            // Simulate checkout process
+            setTimeout(() => {
+                document.getElementById('loading-overlay').style.display = 'none';
+                
+                Swal.fire({
+                    title: 'Lanjutkan ke Checkout?',
+                    text: 'Anda akan diarahkan ke halaman checkout untuk menyelesaikan pesanan.',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#F5B700',
+                    cancelButtonColor: '#6b7280',
+                    confirmButtonText: 'Ya, Lanjutkan',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // In a real application, this would redirect to checkout page
+                        // For demo purposes, we'll show a success message
+                        Swal.fire({
+                            title: 'Fitur Checkout',
+                            text: 'Fitur checkout akan segera tersedia. Terima kasih atas pesanan Anda!',
+                            icon: 'info',
+                            confirmButtonColor: '#F5B700'
+                        });
+                    }
+                });
+            }, 1500);
+        }
+        
+        // Initialize cart display
+        updateCartDisplay();
+        
+        // Update cart count
+        function updateCartCount() {
+            const cartCount = document.getElementById('cart-count');
+            const cartCountMobile = document.getElementById('cart-count-mobile');
+            
+            if (cartCount) cartCount.textContent = cart.getTotalItems();
+            if (cartCountMobile) cartCountMobile.textContent = cart.getTotalItems();
+        }
+        
+        // Initialize cart count
+        updateCartCount();
+    </script>
+</body>
+</html>

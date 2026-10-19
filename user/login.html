@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Bina Ragam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/lucide@latest/fontawesome/lucide.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link rel="stylesheet" href="../assets/css/custom.css">
+</head>
+<body class="font-poppins bg-gradient-to-br from-primary-50 to-secondary-50 min-h-screen flex items-center justify-center p-4">
+    
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-100 rounded-full opacity-20 animate-pulse"></div>
+        <div class="absolute -bottom-40 -left-40 w-60 h-60 bg-secondary-100 rounded-full opacity-20 animate-pulse"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="relative z-10 w-full max-w-md">
+        <!-- Login Card -->
+        <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl p-8 transform transition-all duration-300 hover:shadow-3xl">
+            
+            <!-- Logo/Brand -->
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl mx-auto mb-4 flex items-center justify-center transform hover:scale-105 transition-transform duration-300">
+                    <i data-lucide="shopping-bag" class="w-10 h-10 text-white"></i>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Bina Ragam</h1>
+                <p class="text-gray-600">Selamat datang kembali</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="space-y-6">
+                <div class="space-y-4">
+                    <!-- Email Input -->
+                    <div class="relative">
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i data-lucide="mail" class="w-5 h-5 text-gray-400"></i>
+                            </div>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                required
+                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm"
+                                placeholder="Masukkan email Anda"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="relative">
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i data-lucide="lock" class="w-5 h-5 text-gray-400"></i>
+                            </div>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                required
+                                class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 bg-white/50 backdrop-blur-sm"
+                                placeholder="Masukkan password Anda"
+                            >
+                            <button 
+                                type="button" 
+                                id="togglePassword"
+                                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                            >
+                                <i data-lucide="eye" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="rounded border-gray-300 text-primary-600 focus:ring-primary-500">
+                        <span class="ml-2 text-sm text-gray-600">Ingat saya</span>
+                    </label>
+                    <a href="#" class="text-sm text-primary-600 hover:text-primary-700 transition-colors duration-200">
+                        Lupa password?
+                    </a>
+                </div>
+
+                <!-- Login Button -->
+                <button 
+                    type="submit" 
+                    id="loginButton"
+                    class="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white py-3 px-4 rounded-xl font-medium hover:from-primary-700 hover:to-secondary-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+                >
+                    <span id="loginText">Masuk</span>
+                    <div id="loginSpinner" class="hidden">
+                        <lottie-player
+                            src="https://assets2.lottiefiles.com/packages/lf20_jcikwtux.json"
+                            background="transparent"
+                            speed="1"
+                            style="width: 24px; height: 24px;"
+                            loop
+                            autoplay>
+                        </lottie-player>
+                    </div>
+                </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="relative my-6">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-300"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                    <span class="px-2 bg-white text-gray-500">atau</span>
+                </div>
+            </div>
+
+            <!-- Register Link -->
+            <div class="text-center">
+                <p class="text-gray-600">
+                    Belum punya akun? 
+                    <a href="register.html" class="text-primary-600 hover:text-primary-700 font-medium transition-colors duration-200">
+                        Daftar sekarang
+                    </a>
+                </p>
+            </div>
+
+            <!-- Back to Home -->
+            <div class="text-center mt-6">
+                <a href="../index.html" class="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 transition-colors duration-200">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i>
+                    Kembali ke beranda
+                </a>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="hidden mt-4 bg-red-50 border border-red-200 rounded-xl p-4">
+            <div class="flex items-center">
+                <i data-lucide="alert-circle" class="w-5 h-5 text-red-500 mr-2"></i>
+                <p class="text-red-700 text-sm" id="errorText"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="../assets/js/firebase-config.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // GSAP Animations
+        gsap.from(".bg-white\/80", {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: "power2.out",
+            delay: 0.2
+        });
+
+        gsap.from(".text-center", {
+            duration: 0.8,
+            y: 30,
+            opacity: 0,
+            ease: "power2.out",
+            delay: 0.4
+        });
+
+        gsap.from("form", {
+            duration: 0.8,
+            y: 30,
+            opacity: 0,
+            ease: "power2.out",
+            delay: 0.6
+        });
+
+        // Password Toggle
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = togglePassword.querySelector('i');
+
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            if (type === 'password') {
+                eyeIcon.setAttribute('data-lucide', 'eye');
+            } else {
+                eyeIcon.setAttribute('data-lucide', 'eye-off');
+            }
+            lucide.createIcons();
+        });
+
+        // Login Form Handler
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginButton = document.getElementById('loginButton');
+            const loginText = document.getElementById('loginText');
+            const loginSpinner = document.getElementById('loginSpinner');
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+
+            try {
+                // Show loading state
+                loginText.classList.add('hidden');
+                loginSpinner.classList.remove('hidden');
+                loginButton.disabled = true;
+                errorMessage.classList.add('hidden');
+
+                // Login with Firebase
+                const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+
+                // Get user role from Firestore
+                const userDoc = await firebase.firestore().collection('users').doc(user.uid).get();
+                const userData = userDoc.data();
+
+                // Show success message
+                await Swal.fire({
+                    title: 'Login Berhasil!',
+                    text: 'Selamat datang kembali di Bina Ragam',
+                    icon: 'success',
+                    confirmButtonColor: '#4F46E5',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+
+                // Redirect based on role
+                if (userData && userData.role === 'admin') {
+                    window.location.href = '../admin/dashboard.php';
+                } else {
+                    window.location.href = '../index.html';
+                }
+
+            } catch (error) {
+                // Hide loading state
+                loginText.classList.remove('hidden');
+                loginSpinner.classList.add('hidden');
+                loginButton.disabled = false;
+
+                // Show error message
+                let errorMessage = 'Login gagal. Silakan coba lagi.';
+                if (error.code === 'auth/invalid-email') {
+                    errorMessage = 'Email tidak valid.';
+                } else if (error.code === 'auth/user-disabled') {
+                    errorMessage = 'Akun Anda telah dinonaktifkan.';
+                } else if (error.code === 'auth/user-not-found') {
+                    errorMessage = 'Pengguna tidak ditemukan.';
+                } else if (error.code === 'auth/wrong-password') {
+                    errorMessage = 'Password salah.';
+                }
+
+                errorText.textContent = errorMessage;
+                document.getElementById('errorMessage').classList.remove('hidden');
+
+                Swal.fire({
+                    title: 'Login Gagal',
+                    text: errorMessage,
+                    icon: 'error',
+                    confirmButtonColor: '#DC2626'
+                });
+            }
+        });
+
+        // Check if user is already logged in
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // User is signed in, redirect to appropriate page
+                firebase.firestore().collection('users').doc(user.uid).get().then((doc) => {
+                    if (doc.exists && doc.data().role === 'admin') {
+                        window.location.href = '../admin/dashboard.php';
+                    } else {
+                        window.location.href = '../index.html';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

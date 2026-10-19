@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak Kami - Bina Ragam</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Lottie -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md shadow-sm z-50" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        Bina Ragam
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="nav-link">Beranda</a>
+                        <a href="user/products.html" class="nav-link">Produk</a>
+                        <a href="tentang.html" class="nav-link">Tentang</a>
+                        <a href="kontak.html" class="nav-link active">Kontak</a>
+                        <a href="user/login.html" class="btn-primary">Masuk</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="nav-link p-2">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden bg-white/95 backdrop-blur-md hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="mobile-nav-link">Beranda</a>
+                <a href="user/products.html" class="mobile-nav-link">Produk</a>
+                <a href="tentang.html" class="mobile-nav-link">Tentang</a>
+                <a href="kontak.html" class="mobile-nav-link active">Kontak</a>
+                <a href="user/login.html" class="mobile-nav-link">Masuk</a>
+                <a href="user/register.html" class="mobile-nav-link">Daftar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-primary/10 to-secondary/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center" data-aos="fade-up">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Hubungi Kami
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Kami siap membantu Anda. Jangan ragu untuk menghubungi kami melalui berbagai channel yang tersedia.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Contact Info -->
+                <div class="lg:col-span-1" data-aos="fade-right">
+                    <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Informasi Kontak</h2>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-primary/10 p-3 rounded-xl mr-4 flex-shrink-0">
+                                    <i data-lucide="map-pin" class="w-6 h-6 text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Alamat Kantor</h4>
+                                    <p class="text-gray-600">
+                                        Jl. Sudirman No. 123<br>
+                                        Jakarta Pusat, 10220<br>
+                                        Indonesia
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="bg-secondary/10 p-3 rounded-xl mr-4 flex-shrink-0">
+                                    <i data-lucide="phone" class="w-6 h-6 text-secondary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Telepon</h4>
+                                    <p class="text-gray-600">
+                                        +62 812-3456-7890<br>
+                                        <small class="text-gray-500">Senin - Jumat, 09:00 - 17:00</small>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="bg-accent/10 p-3 rounded-xl mr-4 flex-shrink-0">
+                                    <i data-lucide="mail" class="w-6 h-6 text-accent"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Email</h4>
+                                    <p class="text-gray-600">
+                                        info@binaragam.com<br>
+                                        <small class="text-gray-500">Respon dalam 24 jam</small>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="bg-success/10 p-3 rounded-xl mr-4 flex-shrink-0">
+                                    <i data-lucide="message-circle" class="w-6 h-6 text-success"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">WhatsApp</h4>
+                                    <p class="text-gray-600">
+                                        +62 812-3456-7890<br>
+                                        <small class="text-gray-500">Chat sekarang untuk bantuan cepat</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Media -->
+                        <div class="mt-8 pt-6 border-t border-gray-200">
+                            <h4 class="font-semibold text-gray-900 mb-4">Ikuti Kami</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="bg-gray-100 hover:bg-gray-200 p-3 rounded-xl transition-colors">
+                                    <i data-lucide="instagram" class="w-5 h-5 text-gray-700"></i>
+                                </a>
+                                <a href="#" class="bg-gray-100 hover:bg-gray-200 p-3 rounded-xl transition-colors">
+                                    <i data-lucide="facebook" class="w-5 h-5 text-gray-700"></i>
+                                </a>
+                                <a href="#" class="bg-gray-100 hover:bg-gray-200 p-3 rounded-xl transition-colors">
+                                    <i data-lucide="twitter" class="w-5 h-5 text-gray-700"></i>
+                                </a>
+                                <a href="#" class="bg-gray-100 hover:bg-gray-200 p-3 rounded-xl transition-colors">
+                                    <i data-lucide="youtube" class="w-5 h-5 text-gray-700"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Hours -->
+                    <div class="bg-white rounded-2xl shadow-lg p-8">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Jam Operasional</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Senin - Jumat</span>
+                                <span class="font-semibold text-gray-900">09:00 - 17:00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Sabtu</span>
+                                <span class="font-semibold text-gray-900">09:00 - 15:00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Minggu</span>
+                                <span class="font-semibold text-gray-900">Tutup</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4">
+                            *Layanan WhatsApp tersedia 24 jam untuk pertanyaan umum
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-2" data-aos="fade-left">
+                    <div class="bg-white rounded-2xl shadow-lg p-8">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Kirim Pesan</h2>
+                        
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                                        Nama Lengkap <span class="text-red-500">*</span>
+                                    </label>
+                                    <input type="text" 
+                                           id="name" 
+                                           name="name" 
+                                           required
+                                           class="form-input"
+                                           placeholder="Masukkan nama Anda">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                                        Email <span class="text-red-500">*</span>
+                                    </label>
+                                    <input type="email" 
+                                           id="email" 
+                                           name="email" 
+                                           required
+                                           class="form-input"
+                                           placeholder="Masukkan email Anda">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Nomor Telepon
+                                </label>
+                                <input type="tel" 
+                                       id="phone" 
+                                       name="phone" 
+                                       class="form-input"
+                                       placeholder="Masukkan nomor telepon (opsional)">
+                            </div>
+
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Subjek <span class="text-red-500">*</span>
+                                </label>
+                                <select id="subject" 
+                                        name="subject" 
+                                        required
+                                        class="form-input">
+                                    <option value="">Pilih subjek pesan</option>
+                                    <option value="pertanyaan-produk">Pertanyaan Produk</option>
+                                    <option value="masalah-akun">Masalah Akun</option>
+                                    <option value="order-status">Status Pesanan</option>
+                                    <option value="kerjasama">Kerjasama</option>
+                                    <option value="lainnya">Lainnya</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Pesan <span class="text-red-500">*</span>
+                                </label>
+                                <textarea id="message" 
+                                          name="message" 
+                                          rows="5" 
+                                          required
+                                          class="form-input"
+                                          placeholder="Tuliskan pesan Anda di sini..."></textarea>
+                            </div>
+
+                            <button type="submit" 
+                                    id="submit-btn"
+                                    class="w-full btn-primary">
+                                <span id="submit-text">
+                                    <i data-lucide="send" class="w-4 h-4 mr-2"></i>
+                                    Kirim Pesan
+                                </span>
+                                <span id="submit-loading" class="hidden">
+                                    <lottie-player
+                                        src="https://assets4.lottiefiles.com/packages/lf20_t9gkkhz4.json"
+                                        background="transparent"
+                                        speed="1"
+                                        style="width: 20px; height: 20px; display: inline-block;"
+                                        loop
+                                        autoplay>
+                                    </lottie-player>
+                                    Mengirim...
+                                </span>
+                            </button>
+                        </form>
+
+                        <!-- Alternative Contact Methods -->
+                        <div class="mt-8 pt-6 border-t border-gray-200">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Atau hubungi kami melalui:</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <a href="https://wa.me/6281234567890" 
+                                   target="_blank"
+                                   class="flex items-center justify-center p-4 bg-green-500 hover:bg-green-600 text-white rounded-xl transition-colors">
+                                    <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i>
+                                    WhatsApp
+                                </a>
+                                <a href="mailto:info@binaragam.com" 
+                                   class="flex items-center justify-center p-4 bg-primary hover:bg-primary/90 text-white rounded-xl transition-colors">
+                                    <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
+                                    Email Langsung
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Lokasi Kami</h2>
+                <p class="text-xl text-gray-600">Kunjungi kantor kami untuk konsultasi langsung</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                <div class="aspect-w-16 aspect-h-9">
+                    <!-- map embed removed: configure your own location -->
+                </div>
+                <div class="p-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Kantor Pusat Bina Ragam</h3>
+                            <p class="text-gray-600 mb-2">Jl. Sudirman No. 123, Jakarta Pusat, Indonesia</p>
+                            <p class="text-sm text-gray-500">Koordinat: -6.1947, 106.8229</p>
+                        </div>
+                        <a href="https://goo.gl/maps/xxx" 
+                           target="_blank"
+                           class="btn-primary mt-4 sm:mt-0">
+                            <i data-lucide="navigation" class="w-4 h-4 mr-2"></i>
+                            Petunjuk Arah
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Bina Ragam</h3>
+                    <p class="text-gray-400 mb-4">Platform toko online terpercaya dengan berbagai produk berkualitas.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Produk</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="user/products.html?category=fashion" class="hover:text-white transition-colors">Fashion</a></li>
+                        <li><a href="user/products.html?category=elektronik" class="hover:text-white transition-colors">Elektronik</a></li>
+                        <li><a href="user/products.html?category=rumah-tangga" class="hover:text-white transition-colors">Rumah Tangga</a></li>
+                        <li><a href="user/products.html" class="hover:text-white transition-colors">Semua Produk</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Informasi</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="tentang.html" class="hover:text-white transition-colors">Tentang Kami</a></li>
+                        <li><a href="kontak.html" class="hover:text-white transition-colors">Kontak</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Kontak</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <div class="flex items-center">
+                            <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
+                            <span>+62 812-3456-7890</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="mail" class="w-4 h-4 mr-2"></i>
+                            <span>info@binaragam.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Jakarta, Indonesia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-gray-700 my-8">
+            <div class="text-center text-gray-400">
+                <p>&copy; 2024 Bina Ragam. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Initialize GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
+        });
+
+        // Contact form handling
+        document.getElementById('contact-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const submitText = document.getElementById('submit-text');
+            const submitLoading = document.getElementById('submit-loading');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitText.classList.add('hidden');
+            submitLoading.classList.remove('hidden');
+
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                // Simulate API call (replace with actual Firebase integration)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Here you would typically send to Firebase or your backend
+                // For now, we'll just show success message
+                
+                // Show success message
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Pesan Terkirim!',
+                    text: 'Terima kasih telah menghubungi kami. Kami akan membalas dalam waktu 24 jam.',
+                    confirmButtonColor: '#3B82F6'
+                });
+
+                // Reset form
+                document.getElementById('contact-form').reset();
+
+            } catch (error) {
+                // Show error message
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal Mengirim',
+                    text: 'Maaf, terjadi kesalahan. Silakan coba lagi atau hubungi kami melalui WhatsApp.',
+                    confirmButtonColor: '#3B82F6'
+                });
+            } finally {
+                // Hide loading state
+                submitBtn.disabled = false;
+                submitText.classList.remove('hidden');
+                submitLoading.classList.add('hidden');
+            }
+        });
+
+        // GSAP Animations
+        gsap.from(".bg-white.rounded-2xl", {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            stagger: 0.2,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: ".bg-white.rounded-2xl",
+                start: "top 80%"
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
